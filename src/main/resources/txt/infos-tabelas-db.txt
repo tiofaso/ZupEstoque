@@ -1,0 +1,19 @@
+tb_produto
+id (long)
+nome (string 50)
+quantidade (int)
+preco (double)
+informacoes (string 255)
+deposito (string 3)
+corredor (string 3)
+estante (string 3)
+prateleira (string 3)
+codigodebarras (string 13)
+status (boolean)
+
+tb_historico
+id (long)
+idproduto (long)
+data (data)
+hora (hora)
+status (string 15)
