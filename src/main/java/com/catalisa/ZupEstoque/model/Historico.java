@@ -20,8 +20,8 @@ public class Historico {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany
-    @JoinColumn(name = "idProduto", referencedColumnName = "id",table = "tb_produto")
+    @ManyToOne
+    @JoinColumn(name = "idProduto", referencedColumnName = "id", insertable = false, updatable = false)
     private Produto produto;
     private Long idProduto;
 
