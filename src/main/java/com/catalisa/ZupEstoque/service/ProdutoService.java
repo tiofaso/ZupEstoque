@@ -5,7 +5,6 @@ import com.catalisa.ZupEstoque.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.lang.model.element.ModuleElement;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,13 +14,32 @@ public class ProdutoService {
     @Autowired
     ProdutoRepository produtoRepository;
 
+    @Autowired
+    HistoricoService historicoService;
+
     //Método para cadastrar produto
     public Produto cadastraProdutoBase(Produto produto) {
-        return produtoRepository.save(produto);
+        Long id = produtoRepository.count(); ///Todo resolver essa exceção brava
+
+        //Atualizando o histórico
+        historicoService.salvaHistorico("cadastra",id);
+
+        return  produtoRepository.save(produto);
+
+
     }
 
     //Método que apaga produto
-    public void deletaProdutoBase(Long id) { produtoRepository.deleteById(id); }
+    public void deletaProdutoBase(Long id) {
+        Produto deleta = buscarProdutoPorIdBase(id).get();
+        deleta.setStatus(false);
+
+        //Atualizando o histórico
+        historicoService.salvaHistorico("deleta",id);
+
+
+        produtoRepository.save(deleta);
+    }
 
     //Método que lista todos os produtos
     public List<Produto> buscaTodosProdutosBase() { return produtoRepository.findAll(); }
@@ -41,8 +59,10 @@ public class ProdutoService {
             atualizaProduto.setPrateleira(produto.getPrateleira());
             atualizaProduto.setCodigoDeBarras(produto.getCodigoDeBarras());
             atualizaProduto.setStatus(produto.getStatus());
-        }
 
+            //Atualizando o histórico
+            historicoService.salvaHistorico("atualiza",id);
+        }
         return produtoRepository.save(atualizaProduto);
     }
 
