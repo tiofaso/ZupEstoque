@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/zupestoque")
@@ -44,6 +45,9 @@ public class ProdutoController {
 
     }
 
-
+    @GetMapping(path = "/produto/{id}") //Exibe um produto específico
+    public Optional<Produto> mostrarProduto(@PathVariable Long id){
+        return produtoService.buscarProdutoPorIdBase(id);
+    }
 
 }
