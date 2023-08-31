@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "api/zupestoque")
@@ -34,8 +35,9 @@ public class ProdutoController {
     }
 
     @GetMapping(path = "/produtos") //Lista todos os produtos do estoque
-    public List<Produto> listarProdutos() {
-        return produtoService.buscaTodosProdutosBase();
+    public List<ProdutoDTO> listarProdutos() {
+        List<Produto> listaProdutos = produtoService.buscaTodosProdutosBase();
+        return listaProdutos.stream().map(produtoMapper::toDto).collect(Collectors.toList());
     }
 
     @PutMapping(path = "/atualiza/{id}") //Atualiza determinado produto

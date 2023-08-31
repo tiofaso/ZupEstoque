@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Service
 public class HistoricoService {
@@ -29,4 +30,8 @@ public class HistoricoService {
         return historicoRepository.save(registroEstoque);
 
     }
+
+    //Método para listar o log
+    public List<Historico> exibeHistorico() { return historicoRepository.findAll(); }
+
 }

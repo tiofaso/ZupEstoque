@@ -43,8 +43,7 @@ public class ProdutoService {
     }
 
     //Método que lista todos os produtos
-    public List<Produto> buscaTodosProdutosBase() { return produtoRepository.findAll(); }
-
+    public List<Produto> buscaTodosProdutosBase() { return produtoRepository.findAllByStatusTrue();}
     //Método que atualiza produtos
     public Produto atualizaProdutoBase(Long id, Produto produto) {
         Produto atualizaProduto = buscarProdutoPorIdBase(id).get();
