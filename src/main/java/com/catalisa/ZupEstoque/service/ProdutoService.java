@@ -19,12 +19,13 @@ public class ProdutoService {
 
     //Método para cadastrar produto
     public Produto cadastraProdutoBase(Produto produto) {
-        Long id = produtoRepository.count(); ///Todo resolver essa exceção brava
+        produtoRepository.save(produto);
 
         //Atualizando o histórico
+        Long id = produtoRepository.count();
         historicoService.salvaHistorico("cadastra",id);
 
-        return  produtoRepository.save(produto);
+        return produtoRepository.getReferenceById(id);
 
 
     }
