@@ -1,0 +1,180 @@
+swagger: "2.0"
+info:
+  title: Zup Estoque API
+  version: 1.0.0
+paths:
+  /api/zupestoque/produtos:
+    get:
+      summary: Retorna a lista de todos os produtos
+      responses:
+        200:
+          description: Lista de produtos obtida com sucesso
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+                quantidade:
+                  type: integer
+                preco:
+                  type: number
+                  format: double
+                informacoes:
+                  type: string
+                deposito:
+                  type: string
+                corredor:
+                  type: string
+                estante:
+                  type: string
+                prateleira:
+                  type: string
+                codigoDeBarras:
+                  type: string
+
+  /api/zupestoque/cadastro:              
+    post:
+      summary: Adiciona um novo produto
+      parameters:
+        - name: cadastro
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              nome:
+                type: string
+              quantidade:
+                type: integer
+              preco:
+                type: number
+                format: double
+              informacoes:
+                type: string  
+              deposito:
+                type: string
+              corredor:
+                type: string
+              estante:
+                type: string
+              prateleira:
+                type: string
+              codigoDeBarras:
+                type: string
+              status:
+                type: boolean
+      responses:
+        201:
+          description: Produto adicionado com sucesso
+          
+  /api/zupestoque/historico:
+    get:
+      summary: Retorna log de modificações no estoque 
+      responses:
+        200:
+          description: Log exibido com sucesso
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                idProduto:
+                  type: integer
+                data:
+                  type: string
+                  format: date
+                hora:
+                  type: integer
+                  format: time
+                status:
+                  type: boolean
+                
+              
+  /api/zupestoque/produto/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        type: integer
+    get:
+      summary: Retorna detalhes de um produto específico
+      responses:
+        200:
+          description: Detalhes do produto obtidos com sucesso
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+              nome:
+                type: string
+              quantidade:
+                type: integer
+              preco:
+                type: number
+                format: double
+              informacoes:
+                type: string
+              deposito:
+                type: string
+              corredor:
+                type: string
+              estante:
+                type: string
+              prateleira:
+                type: string
+              codigoDeBarras:
+                type: string
+              status:
+                type: boolean
+    put:
+      summary: Atualiza um produto existente
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+        - name: atualiza
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              nome:
+                type: string
+              quantidade:
+                type: integer
+              preco:
+                type: number
+                format: double
+              informacoes:
+                type: string
+              deposito:
+                type: string
+              corredor:
+                type: string
+              estante:
+                type: string
+              prateleira:
+                type: string
+              codigoDeBarras:
+                type: string
+              status:
+                type: boolean
+      responses:
+        200:
+          description: Produto atualizado com sucesso
+    delete:
+      summary: Remove um produto existente
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+      responses:
+        204:
+          description: Produto removido com sucesso
