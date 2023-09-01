@@ -1,0 +1,82 @@
+{
+	"info": {
+		"_postman_id": "55bb6658-c5ef-45c0-ab38-3a67cc95eccd",
+		"name": "ZupEstoque",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "28447111"
+	},
+	"item": [
+		{
+			"name": "cadastra produto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\":\"papel novo\",\r\n    \"quantidade\":10,\r\n    \"preco\":50.0,\r\n    \"informacoes\":\"segundo produto do estoque\",\r\n    \"deposito\":\"B\",\r\n    \"corredor\":\"4\",\r\n    \"estante\":\"6\",\r\n    \"prateleira\":\"11\",\r\n    \"codigoDeBarras\":\"978020137966\",\r\n    \"status\":true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/zupestoque/cadastro"
+			},
+			"response": []
+		},
+		{
+			"name": "lista produtos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/zupestoque/produtos"
+			},
+			"response": []
+		},
+		{
+			"name": "apaga produto",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:8080/api/zupestoque/apaga/8"
+			},
+			"response": []
+		},
+		{
+			"name": "atualiza produto",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\":\"papel teste kraft\",\r\n    \"quantidade\":500,\r\n    \"preco\": 80.0,\r\n    \"informacoes\":\"terceiro produto do estoque\",\r\n    \"deposito\":\"C\",\r\n    \"corredor\":\"4\",\r\n    \"estante\":\"8\",\r\n    \"prateleira\":\"2\",\r\n    \"codigoDeBarras\":\"978034144866\",\r\n    \"status\":false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/zupestoque/produto/1"
+			},
+			"response": []
+		},
+		{
+			"name": "exibe produto específico",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/zupestoque/produto/1"
+			},
+			"response": []
+		},
+		{
+			"name": "exibe histórico",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/zupestoque/historico"
+			},
+			"response": []
+		}
+	]
+}
