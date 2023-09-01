@@ -38,15 +38,23 @@ public class Produto {
     private String informacoes;
 
     @Column(length = 3, nullable = false)
+    @NotBlank(message = "O valor do depósito não pode estar em branco")
+    @Size(min = 1, max = 3, message = "Você pode digitar até 3 caracteres")
     private String deposito;
 
     @Column(length = 3, nullable = false)
+    @NotBlank(message = "O valor do corredor não pode estar em branco")
+    @Size(min = 1, max = 3, message = "Você pode digitar até 3 caracteres")
     private String corredor;
 
     @Column(length = 3, nullable = false)
+    @NotBlank(message = "O valor da estante não pode estar em branco")
+    @Size(min = 1, max = 3, message = "Você pode digitar até 3 caracteres")
     private String estante;
 
     @Column(length = 3, nullable = false)
+    @NotBlank(message = "O valor da prateleira não pode estar em branco")
+    @Size(min = 1, max = 3, message = "Você pode digitar até 3 caracteres")
     private String prateleira;
 
     @Column(length = 13, nullable = false)
