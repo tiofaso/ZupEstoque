@@ -10,8 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
-import com.catalisa.ZupEstoque.exception.IdError;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -49,14 +47,8 @@ public class ProdutoController {
 
     @PutMapping(path = "/produto/{id}") //Atualiza determinado produto
     public ResponseEntity<ProdutoDTO> atualizarProduto(@PathVariable Long id, @RequestBody @Valid Produto produto) {
-        //try {
             Produto atualizaProduto = produtoService.atualizaProdutoBase(id,produto);
             return new ResponseEntity<>(produtoMapper.toDto(atualizaProduto), HttpStatus.CREATED);
-
-        //}catch (IdError ex) { ///Todo ainda não tá lançando erro no body
-         //   String mensagem = "Não foi enviado um ID para o sistema";
-            //throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Provide correct Actor Id", ex);
-        //}
     }
 
     @GetMapping(path = "/produto/{id}") //Exibe um produto específico
