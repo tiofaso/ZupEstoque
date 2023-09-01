@@ -36,7 +36,7 @@ public class ProdutoController {
         return new ResponseEntity<>(produtoMapper.toDto(novoProduto), HttpStatus.CREATED);
     }
 
-    @DeleteMapping(path = "/apaga/{id}") //Apaga produto do estoque
+    @DeleteMapping(path = "/produto/{id}") //Apaga produto do estoque
     public void apagarProduto(@PathVariable Long id) {
         produtoService.deletaProdutoBase(id);
     }
@@ -47,7 +47,7 @@ public class ProdutoController {
         return listaProdutos.stream().map(produtoMapper::toDto).collect(Collectors.toList());
     }
 
-    @PutMapping(path = "/atualiza/{id}") //Atualiza determinado produto
+    @PutMapping(path = "/produto/{id}") //Atualiza determinado produto
     public ResponseEntity<ProdutoDTO> atualizarProduto(@PathVariable Long id, @RequestBody @Valid Produto produto) {
         //try {
             Produto atualizaProduto = produtoService.atualizaProdutoBase(id,produto);
@@ -60,8 +60,11 @@ public class ProdutoController {
     }
 
     @GetMapping(path = "/produto/{id}") //Exibe um produto específico
-    public Optional<Produto> mostrarProduto(@PathVariable Long id){
-        return produtoService.buscarProdutoPorIdBase(id);
+    public List<ProdutoDTO> mostrarProduto(@PathVariable Long id){
+        Optional<Produto> listaProdutoPorId = produtoService.buscarProdutoPorIdBase(id);
+        return listaProdutoPorId.stream().map(produtoMapper::toDto).collect(Collectors.toList());
+
+
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
